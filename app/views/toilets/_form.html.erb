@@ -1,0 +1,109 @@
+<%= form_with(model: toilet) do |form| %>
+  <% if toilet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(toilet.errors.count, "error") %> prohibited this toilet from being saved:</h2>
+
+      <ul>
+        <% toilet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :toilet_name %>
+    <%= form.text_field :toilet_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :multipurpose %>
+    <%= form.check_box :multipurpose %>
+  </div>
+
+  <div class="field">
+    <%= form.label :m_urinal %>
+    <%= form.number_field :m_urinal %>
+  </div>
+
+  <div class="field">
+    <%= form.label :m_room %>
+    <%= form.number_field :m_room %>
+  </div>
+
+  <div class="field">
+    <%= form.label :m_washlet %>
+    <%= form.check_box :m_washlet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :w_room %>
+    <%= form.number_field :w_room %>
+  </div>
+
+  <div class="field">
+    <%= form.label :w_washlet %>
+    <%= form.check_box :w_washlet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :open_time %>
+    <%= form.time_select :open_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :close_time %>
+    <%= form.time_select :close_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remark %>
+    <%= form.text_field :remark %>
+  </div>
+
+  <div class="field">
+		<%= form.hidden_field :latitude, {id: "map_lat"} %>
+		<%= form.hidden_field :longtitude, {id: "map_lng"} %>
+    <%= form.hidden_field :user_id, value:current_user.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<!-- 以下、GoogleMAP API部分 -->
+<style>
+/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+#map {
+  height: 400px;
+  width: 600px;
+}
+</style>
+
+<div id="map"></div>
+
+<script>
+//let map;
+function initMap() {
+  const myLatlng = { lat: 35.681, lng: 139.767 };
+  const map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: myLatlng
+  });
+
+  let marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map
+  });
+
+  google.maps.event.addListener(map, 'click', (e) => {
+    document.getElementById("map_lat").value = e.latLng.lat();
+    document.getElementById("map_lng").value = e.latLng.lng();
+    marker.setPosition(e.latLng);
+  });
+}
+google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>

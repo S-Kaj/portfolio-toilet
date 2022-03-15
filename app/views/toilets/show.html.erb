@@ -1,0 +1,103 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Toilet name:</strong>
+  <%= @toilet.toilet_name %>
+</p>
+
+<p>
+  <strong>Multipurpose:</strong>
+  <%= @toilet.multipurpose %>
+</p>
+
+<p>
+  <strong>M urinal:</strong>
+  <%= @toilet.m_urinal %>
+</p>
+
+<p>
+  <strong>M room:</strong>
+  <%= @toilet.m_room %>
+</p>
+
+<p>
+  <strong>M washlet:</strong>
+  <%= @toilet.m_washlet %>
+</p>
+
+<p>
+  <strong>W room:</strong>
+  <%= @toilet.w_room %>
+</p>
+
+<p>
+  <strong>W washlet:</strong>
+  <%= @toilet.w_washlet %>
+</p>
+
+<p>
+  <strong>Open time:</strong>
+  <%= @toilet.open_time %>
+</p>
+
+<p>
+  <strong>Close time:</strong>
+  <%= @toilet.close_time %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @toilet.remark %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @toilet.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_toilet_path(@toilet) %> |
+<%= link_to 'Back', toilets_path %>
+
+
+<p>
+  <strong>取得した経度と緯度</strong>
+  <%= @toilet.latitude %>
+  <%= @toilet.longtitude %>
+</p>
+
+
+<input type="hidden" id="xyz" value="<%= @latlng %>">
+
+<!-- 以下、GoogleMAP API部分 -->
+<style>
+/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+#map {
+  height: 400px;
+  width: 600px;
+}
+</style>
+
+<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+
+<script>
+let map;
+const latitude = gon.latitude;
+const longtitude = gon.longtitude;
+function initMap() {
+  let myLatlng = new google.maps.LatLng(latitude, longtitude);
+  //インスタンスを作成
+  map = new google.maps.Map(document.getElementById('map'), {
+    //地図のオプション
+    //初期のズームレベル
+    zoom: 17,
+    //地図の中心点
+    center: myLatlng
+  });
+  //マーカーの初期プロパティを指定
+  marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>
