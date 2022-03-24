@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<html lang="ja">
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>ToiletPortfolio</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -10,6 +12,8 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -18,5 +22,7 @@
     <%= render "shared/header" %>
     <%= yield %>
     <%= render "shared/footer" %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
