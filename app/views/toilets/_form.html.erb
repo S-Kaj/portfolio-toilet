@@ -1,77 +1,75 @@
-<%= form_with(model: toilet) do |form| %>
-  <% if toilet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(toilet.errors.count, "error") %> prohibited this toilet from being saved:</h2>
+<div class="form-flame">
+  <%= form_with(model: toilet) do |form| %>
+    <% if toilet.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(toilet.errors.count, "error") %> prohibited this toilet from being saved:</h2>
 
-      <ul>
-        <% toilet.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% toilet.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :toilet_name, :class => 'required' %><br>
+      <%= form.text_field :toilet_name, :class => 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :multipurpose %>
+      <%= form.check_box :multipurpose %>
+    </div>
+
+    <div class="field">
+      <%= form.label :m_urinal %>
+      <%= form.number_field :m_urinal, :class => 'form-control number' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :room %>
+      <%= form.number_field :m_room, :class => 'form-control number' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :washlet %>
+      <%= form.check_box :m_washlet %>
+    </div>
+
+    <div class="field">
+      <%= form.label :room %>
+      <%= form.number_field :w_room, :class => 'form-control number' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :washlet %>
+      <%= form.check_box :w_washlet %>
+    </div>
+
+    <div class="field">
+      <%= form.label :possible_time %><br>
+      <%= form.time_select :open_time, {include_blank: true, start_hour: 0, end_hour: 24, minute_step: 10}, :class => 'form-control number' %>
+      ー
+      <%= form.time_select :close_time, {include_blank: true, start_hour: 0, end_hour: 24, minute_step: 10}, :class => 'form-control number' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :remark %><br>
+      <%= form.text_area :remark, maxlength: "80", :class => 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.hidden_field :latitude, {id: "map_lat"} %>
+      <%= form.hidden_field :longtitude, {id: "map_lng"} %>
+      <%= form.hidden_field :user_id, value:current_user.id %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "登録する", :class => 'btn-control submit' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :toilet_name %>
-    <%= form.text_field :toilet_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :multipurpose %>
-    <%= form.check_box :multipurpose %>
-  </div>
-
-  <div class="field">
-    <%= form.label :m_urinal %>
-    <%= form.number_field :m_urinal %>
-  </div>
-
-  <div class="field">
-    <%= form.label :m_room %>
-    <%= form.number_field :m_room %>
-  </div>
-
-  <div class="field">
-    <%= form.label :m_washlet %>
-    <%= form.check_box :m_washlet %>
-  </div>
-
-  <div class="field">
-    <%= form.label :w_room %>
-    <%= form.number_field :w_room %>
-  </div>
-
-  <div class="field">
-    <%= form.label :w_washlet %>
-    <%= form.check_box :w_washlet %>
-  </div>
-
-  <div class="field">
-    <%= form.label :open_time %>
-    <%= form.time_select :open_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :close_time %>
-    <%= form.time_select :close_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :remark %>
-    <%= form.text_field :remark %>
-  </div>
-
-  <div class="field">
-		<%= form.hidden_field :latitude, {id: "map_lat"} %>
-		<%= form.hidden_field :longtitude, {id: "map_lng"} %>
-    <%= form.hidden_field :user_id, value:current_user.id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
+</div>
 
 <!-- 以下、GoogleMAP API部分 -->
 <style>

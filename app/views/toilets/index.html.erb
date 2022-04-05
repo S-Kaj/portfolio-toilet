@@ -13,8 +13,7 @@
       <th>[男]ウォシュレット</th>
       <th>[女]個室数</th>
       <th>[女]ウォシュレット</th>
-      <th>オープン時間</th>
-      <th>クローズ時間</th>
+      <th>営業時間</th>
       <th>備考</th>
       <th>緯度</th>
       <th>経度</th>
@@ -34,8 +33,11 @@
         <td><%= toilet.m_washlet %></td>
         <td><%= toilet.w_room %></td>
         <td><%= toilet.w_washlet %></td>
-        <td><%= toilet.open_time %></td>
-        <td><%= toilet.close_time %></td>
+        <td>
+          <span>
+            <%= toilet.open_time.strftime( "%H:%M" ) %>-<%= toilet.close_time.strftime( "%H:%M" ) %>
+          </span>
+        </td>
         <td><%= toilet.remark %></td>
         <td><%= toilet.latitude %></td>
         <td><%= toilet.longtitude %></td>

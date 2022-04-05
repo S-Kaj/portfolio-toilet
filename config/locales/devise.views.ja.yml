@@ -5,11 +5,11 @@ ja:
         current_password: "現在のパスワード"
         email: "メールアドレス"
         password: "パスワード"
-        password_confirmation: "確認用パスワード"
-        remember_me: "ログインを記憶"
+        password_confirmation: "パスワードの確認"
+        remember_me: "ログイン情報を記憶する"
         user_name: "お名前"
     models:
-      user: "ユーザ"
+      user: "ユーザー"
   devise:
     confirmations:
       new:

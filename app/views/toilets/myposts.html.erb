@@ -1,0 +1,24 @@
+<h1>登録済トイレ一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>トイレ名称</th>
+      <th>User_id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @toilets.each do |toilet| %>
+      <tr>
+        <td><%= toilet.id %></td>
+        <td><%= toilet.toilet_name %></td>
+        <td><%= toilet.user_id %></td>
+        <td><%= link_to 'Show', toilet %></td>
+        <td><%= link_to 'Edit', edit_toilet_path(toilet) %></td>
+        <td><%= link_to 'Destroy', toilet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
