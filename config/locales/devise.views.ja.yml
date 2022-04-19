@@ -8,6 +8,7 @@ ja:
         password_confirmation: "パスワードの確認"
         remember_me: "ログイン情報を記憶する"
         user_name: "お名前"
+        edit_image: "ユーザーアイコンの設定"
     models:
       user: "ユーザー"
   devise:
