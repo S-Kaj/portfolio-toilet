@@ -3,6 +3,7 @@ class ToiletsController < ApplicationController
 
   # GET /toilets or /toilets.json
   def index
+    # binding.pry
     @toilets = Toilet.all
     @users = User.all
     gon.toilets = @toilets

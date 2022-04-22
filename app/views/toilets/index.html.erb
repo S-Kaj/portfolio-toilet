@@ -1,5 +1,32 @@
 <p id="notice"><%= notice %></p>
 
+<hr>
+  <% if user_signed_in? %>
+    <p>
+      ようこそ！<%= current_user.user_name %>さん
+      <hr>
+      <%= current_user.id %>
+      <hr>
+      <%= current_user.email %>
+      <hr>
+      <%= current_user.image %>
+      <hr>
+      <hr>
+      <br>
+      <%= link_to 'ログアウト', '/users/sign_out/', method: :delete %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to 'ログイン', '/users/sign_in/', class:'btn-sign_in' %>
+      <%= link_to '新規登録', '/users/sign_up/', class:'btn-sign_up' %>
+    </p>
+
+  <% end %>
+
+
+
+<hr>
+
 <h1>トイレ一覧</h1>
 
 <table>
