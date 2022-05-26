@@ -7,7 +7,7 @@
       <hr>
       ◆アイコン表示テスト◆<br>
       <% if current_user.image.attached? %>
-        <%= image_tag url_for(@user.image) %>
+        <%= image_tag url_for(current_user.image) %>
       <% else %>
         <img src="assets/default_image.jpg" class="image-display">
       <% end %>
