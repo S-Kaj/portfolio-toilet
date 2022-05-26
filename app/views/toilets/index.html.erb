@@ -5,6 +5,14 @@
     <p>
       ようこそ！<%= current_user.user_name %>さん
       <hr>
+      ◆アイコン表示テスト◆<br>
+      <% if current_user.image.attached? %>
+        <%= image_tag url_for(@user.image) %>
+      <% else %>
+        <img src="assets/default_image.jpg" class="image-display">
+      <% end %>
+      <hr>
+      ◆◆<br>
       <%= current_user.id %>
       <hr>
       <%= current_user.email %>

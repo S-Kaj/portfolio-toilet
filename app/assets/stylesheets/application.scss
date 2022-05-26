@@ -58,7 +58,6 @@ $cGreen: #087241;
 
 }
 
-
 label {
   display: inline-block;
   margin: 0.5rem 0;
@@ -125,4 +124,11 @@ label {
     background-color: $cGreen;
     border: 2px solid #003300;
   }
+}
+
+
+.image-display {
+  width: 50px;
+  border-radius: 50%;
+  border: 3px solid gray;
 }
