@@ -1574,6 +1574,7 @@ DEPENDENCIES
   devise-i18n-views
   factory_bot_rails
   gon
+  image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mysql2 (~> 0.5)
