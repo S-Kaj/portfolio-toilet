@@ -88,7 +88,10 @@ function initMap() {
   const myLatlng = { lat: 35.681, lng: 139.767 };
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
-    center: myLatlng
+    center: myLatlng,
+    //地図上でのカーソルの指定
+    draggableCursor: "crosshair",
+    draggingCursor: "move"
   });
 
   let marker = new google.maps.Marker({

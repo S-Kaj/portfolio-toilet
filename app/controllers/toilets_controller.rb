@@ -4,7 +4,8 @@ class ToiletsController < ApplicationController
   # GET /toilets or /toilets.json
   def index
     # binding.pry
-    @toilets = Toilet.all
+    # @toilets = Toilet.all
+    @toilets = Toilet.order("created_at DESC").limit(10)
     @users = User.all
     gon.toilets = @toilets
   end

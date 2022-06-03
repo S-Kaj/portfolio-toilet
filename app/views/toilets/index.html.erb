@@ -7,9 +7,9 @@
       <hr>
       ◆アイコン表示テスト◆<br>
       <% if current_user.image.attached? %>
-        <%= image_tag current_user.image.variant(resize_to_limit: [80, 80]), class: "image-display" %>
+        <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
       <% else %>
-        <img src="assets/default_image.jpg" class="image-display">
+        <img src="assets/default_image.png" class="image-display">
       <% end %>
       <hr>
       ◆ユーザーID◆<br>
@@ -38,7 +38,37 @@
 <hr>
 
 <h1>トイレ一覧</h1>
+◆直近に登録された5件を表示したい◆
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>登録日時</th>
+      <th>トイレ名称</th>
+      <th>営業時間</th>
+      <th>備考</th>
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @toilets.each do |toilet| %>
+      <tr>
+        <td><%= toilet.created_at %></td>
+        <td><%= link_to toilet.toilet_name, toilet %></td>
+        <td>
+          <span>
+            <%= toilet.open_time.strftime( "%H:%M" ) %>-<%= toilet.close_time.strftime( "%H:%M" ) %>
+          </span>
+        </td>
+        <td><%= toilet.remark %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<hr>
+◆とりあえず並べたやつ◆
 <table>
   <thead>
     <tr>
@@ -98,61 +128,31 @@
 <div id='map_index'></div>
 
 <style>
-#map_index{
+#map_index {
   height: 400px;
 }
 </style>
 
-
 <script>
-var map
-var marker = [];
-var infoWindow = [];
-var markerData = gon.toilets; // コントローラーで定義したインスタンス変数を変数に代入
-var toilet_name = [];
-var toilet_lat = [];
-var toilet_lng = [];
-
-// GoogleMapを表示する関数(callback処理で呼び出される)
+// マップを生成
 function initMap(){
-  // ビューのid='map_index'の部分にGoogleMapを埋め込む
-  map = new google.maps.Map(document.getElementById('map_index'), {
-    center: { lat: 35.661, lng: 139.667 }, // 下北沢駅を中心
-    zoom: 12
+  let map = new google.maps.Map(document.getElementById('map_index'), {
+    center: { lat: 35.681, lng: 139.767 }, //マップの中心
+    zoom: 12,                  //マップの解析度
+    // mapTypeControl: false,     //オプション
+    // streetViewControl: false   //オプション
   });
 
-  // 繰り返し処理でマーカーと吹き出しを複数表示させる
-  for (var i = 0; i < markerData.length; i++) {
-    // 各地点の緯度経度を算出
-    markerLatLng = new google.maps.LatLng({
-      lat: markerData[i]['latitude'],
-      lng: markerData[i]['longitude']
+  // 複数マーカーの作成
+  <% @toilets.each do |toilet| %>
+  (function() {
+    let marker = new google.maps.Marker({
+      position: {lat: <%= toilet.latitude %>, lng: <%= toilet.longtitude %>},
+      map: map,
     });
-
-    // マーカーの表示
-    marker[i] = new google.maps.Marker({
-      position: markerLatLng,
-      map: map
-    });
-
-    // 吹き出しの表示
-    // let id = markerData[i]['id']
-    // toilet_name[i]= markerData[i]['name'];
-    // toilet_lat[i]= markerData[i]['latitude'];
-    // toilet_lng[i]= markerData[i]['longitude'];
-    // infoWindow[i] = new google.maps.InfoWindow({
-      // 吹き出しの中身, 引数で各属性の配列と配列番号を渡す
-    //  content: `<a href='/places/${ id }'>${ markerData[i]['name'] }</a><input type="button" value="追加" onclick="addPlace(toilet_name, toilet_lat, toilet_lng, ${i})">`
-    //});
-    markerEvent(i);
-  }
+  })();
+  <% end %>
 }
-
-// マーカーをクリックしたら吹き出しを表示
-// function markerEvent(i) {
-  // marker[i].addListener('click', function () {
-  //  infoWindow[i].open(map, marker[i]);
-  // });
-// }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>

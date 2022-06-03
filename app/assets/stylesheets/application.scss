@@ -118,6 +118,7 @@ label {
   font-size: 1rem;
   font-weight: 600;
   border-radius: 0.5rem;
+  cursor: pointer;
 
   &.submit {
     color: white;
@@ -128,7 +129,6 @@ label {
 
 
 .image-display {
-  width: 80px;
   border-radius: 50%;
   border: 3px solid gray;
 }
