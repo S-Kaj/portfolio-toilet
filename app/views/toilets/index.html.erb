@@ -150,6 +150,15 @@ function initMap(){
       position: {lat: <%= toilet.latitude %>, lng: <%= toilet.longtitude %>},
       map: map,
     });
+
+    // マーカーをクリックした時に吹き出しを表示する
+    let infoWindow = new google.maps.InfoWindow({
+      content: '<%= link_to toilet.toilet_name, toilet %><br>営業時間:<%= toilet.open_time.strftime( "%H:%M" ) %>-<%= toilet.close_time.strftime( "%H:%M" ) %>'
+    });
+    marker.addListener('click', () => {
+      infoWindow.open(map, marker);
+    });
+
   })();
   <% end %>
 }
