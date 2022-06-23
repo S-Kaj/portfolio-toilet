@@ -5,20 +5,28 @@
       <a href="/">トップページ</a>
     </div>
     <div class="header upper right">
-      <% if user_signed_in? %>
-        <p>
-          ようこそ！<%= current_user.user_name %>さん
+      <div class="header upper right">
+        <% if user_signed_in? %>
+          <p>
+            ようこそ！<%= current_user.user_name %>さん
 
-          <br>
-          <%= link_to 'ログアウト', '/users/sign_out/', method: :delete %>
-        </p>
-      <% else %>
-        <p>
-          <%= link_to 'ログイン', '/users/sign_in/', class:'btn-sign_in' %>
-          <%= link_to '新規登録', '/users/sign_up/', class:'btn-sign_up' %>
-        </p>
-
-      <% end %>
+            <br>
+            <%= link_to 'ログアウト', '/users/sign_out/', method: :delete %>
+          </p>
+        <% else %>
+          <p>
+            <%= link_to 'ログイン', '/users/sign_in/', class:'btn-sign_in' %>
+            <%= link_to '新規登録', '/users/sign_up/', class:'btn-sign_up' %>
+          </p>
+        <% end %>
+      </div>
+      <div class="header upper right">
+        <% if current_user.image.attached? %>
+          <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
+        <% else %>
+          <img src="assets/default_image.png" class="image-display">
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="header lower">

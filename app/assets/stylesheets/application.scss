@@ -16,13 +16,17 @@
 
 $cGreen: #087241;
 
+#header {
+  margin: -34px -34px 0 -34px;
+}
+
 .header {
   background-color: gray;
 
   &.upper {
     display: flex;
     justify-content: space-between;
-    height: 60px;
+    height: 80px;
 
     &.left {
       background-color: orange;
@@ -31,7 +35,6 @@ $cGreen: #087241;
     }
 
     &.right {
-      // display: block;
       line-height: 0.5;
       background-color: orange;
       top: 0;
@@ -104,7 +107,26 @@ label {
   border: 3px dashed $cGreen;
   border-radius: 0.5rem;
   background-color: #e3ffe3;
+}
 
+.form-other {
+  margin: 30px -40px -10px 0;
+  text-align: right;
+}
+
+.item {
+  background-color: #cfcfcf;
+  text-align: center;
+
+  &.men {
+    color: blue;
+    background-color: #ace5ff;
+  }
+
+  &.women {
+    color: red;
+    background-color: #ffd3fd;
+  }
 }
 
 .actions {
@@ -131,4 +153,6 @@ label {
 .image-display {
   border-radius: 50%;
   border: 3px solid gray;
+  width: 65px;
+  height: 65px;
 }

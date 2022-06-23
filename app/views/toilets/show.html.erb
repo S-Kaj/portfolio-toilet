@@ -1,15 +1,56 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @toilet.toilet_name %></h1>
 
 <div class="form-flame">
-  <div class="field">
-    <strong>トイレ名称</strong>
-    <%= @toilet.toilet_name %>
-  </div>
+
+  <table>
+    <tr>
+      <td class="item men">男性用</td>
+      <td class="item">メニュー</td>
+      <td class="item women">女性用</td>
+    </tr>
+    <tr>
+      <td class="item men"><%= @toilet.m_urinal %></td>
+      <td class="item">小便器</td>
+      <td class="item women">-</td>
+    </tr>
+    <tr>
+      <td class="item men"><%= @toilet.m_room %></td>
+      <td class="item">個室</td>
+      <td class="item women"><%= @toilet.w_room %></td>
+    </tr>
+    <tr>
+      <td class="item men">
+        <% if @toilet.m_washlet == true %>
+        ○
+        <% elsif @toilet.m_room == nil %>
+        ?
+        <% else %>
+        ×
+        <% end %>
+      </td>
+      <td class="item">ウォシュレット</td>
+      <td class="item women">
+        <% if @toilet.w_washlet == true %>
+        ○
+        <% elsif @toilet.w_room == nil %>
+        ?
+        <% else %>
+        ×
+        <% end %>
+      </td>
+    </tr>
+
+  </table>
 
   <div class="field">
     <strong>多目的トイレ</strong>
-    <%= @toilet.multipurpose %>
+    <% if @toilet.multipurpose == true %>
+    ○
+    <% else %>
+    ×
+    <% end %>
   </div>
 
   <div class="field">
@@ -24,7 +65,13 @@
 
   <div class="field">
     <strong>ウォシュレット</strong>
-    <%= @toilet.m_washlet %>
+    <% if @toilet.m_washlet == true %>
+    ○
+    <% elsif @toilet.m_room == nil %>
+    ?
+    <% else %>
+    ×
+    <% end %>
   </div>
 
   <div class="field">
@@ -34,7 +81,13 @@
 
   <div class="field">
     <strong>ウォシュレット</strong>
-    <%= @toilet.w_washlet %>
+    <% if @toilet.w_washlet == true %>
+    ○
+    <% elsif @toilet.w_room == nil %>
+    ?
+    <% else %>
+    ×
+    <% end %>
   </div>
 
   <div class="field">
