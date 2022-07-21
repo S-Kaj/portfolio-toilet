@@ -15,6 +15,10 @@
  */
 
 $cGreen: #087241;
+$cOrange: #fc9816;
+$cGray: #636363;
+$cMen: #0055ff;
+$cWomen: #ff0055;
 
 #header {
   margin: -34px -34px 0 -34px;
@@ -22,18 +26,15 @@ $cGreen: #087241;
 
 .header {
   background-color: gray;
-
   &.upper {
     display: flex;
     justify-content: space-between;
     height: 80px;
-
     &.left {
       background-color: orange;
       top: 0;
       width: 300px;
     }
-
     &.right {
       line-height: 0.5;
       background-color: orange;
@@ -41,10 +42,8 @@ $cGreen: #087241;
       width: 300px;
     }
   }
-
   &.lower {
     text-align: center;
-
     &.menu {
       margin: 0 auto;
       margin-bottom: -10px;
@@ -52,7 +51,6 @@ $cGreen: #087241;
       display: inline-block;
       width: 19%;
       height: 30px;
-
       & p {
         font-weight: bold;
       }
@@ -66,7 +64,6 @@ label {
   margin: 0.5rem 0;
   font-size: 1rem;
   color: #2c2c2c;
-
   &.required {
     &::after {
       content: "必須";
@@ -80,6 +77,69 @@ label {
   }
 }
 
+#map_index {
+  height: 400px;
+  max-width: 600px;
+  border-radius: 0.5rem;
+  border: 3px solid $cGray;
+}
+
+#map {
+  height: 305px;
+  max-width: 540px;
+  margin: 20px auto;
+  border-radius: 0.5rem;
+  border: 3px solid $cGray;
+}
+
+.page-flame {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 20px;
+  // text-align: center;
+  border: 3px dashed $cOrange;
+  border-radius: 0.5rem;
+  background-color: #fffcd3;
+}
+
+.page-control {
+  font-size: 1.1rem;
+  padding: 0.3rem 0;
+  &.center {
+    margin: 0 auto;
+    text-align: center;
+  }
+  &.table-left {
+    text-align: right;
+  }
+  &.table-right {
+    text-align: left;
+  }
+}
+
+.form-flame {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 30px 10%;
+  border: 3px dashed $cGreen;
+  border-radius: 0.5rem;
+  background-color: #e3ffe3;
+  &.men {
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border: 3px dashed $cMen;
+    background-color: #d2f4ff;
+  }
+  &.women {
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border: 3px dashed $cWomen;
+    background-color: #ffd7de;
+  }
+}
+
 .form-control {
   width: 95%;
   padding: 0.3rem 0.5rem;
@@ -89,24 +149,12 @@ label {
   background-color: #fff;
   border: 1.5px solid #b1b1b1;
   border-radius: 0.25rem;
-
   &:focus {
     background-color: #bbddff;
   }
-
   &.number {
     width: 57px;
-    // padding: 0.3rem 0.1rem;
   }
-
-}
-
-.form-flame {
-  margin: 0 20%;
-  padding: 5% 10%;
-  border: 3px dashed $cGreen;
-  border-radius: 0.5rem;
-  background-color: #e3ffe3;
 }
 
 .form-other {
@@ -114,18 +162,40 @@ label {
   text-align: right;
 }
 
+.toilet-table {
+  min-width: 260px;
+  max-width: 540px;
+  margin: 20px auto;
+  border-radius: 0.5rem;
+}
+
 .item {
+  padding: 10px 15px;
+  font-size: 1.1rem;
   background-color: #cfcfcf;
   text-align: center;
-
+  &.men-label {
+    color: #fff;
+    background-color: $cMen;
+    font-weight: bold;
+  }
   &.men {
-    color: blue;
+    color: $cMen;
     background-color: #ace5ff;
   }
-
+  &.women-label {
+    color: #fff;
+    background-color: $cWomen;
+    font-weight: bold;
+  }
   &.women {
-    color: red;
+    color: $cWomen;
     background-color: #ffd3fd;
+  }
+  &.white {
+    min-width: 160px;
+    max-width: 400px;
+    background-color: #fff;
   }
 }
 
@@ -135,24 +205,54 @@ label {
 }
 
 .btn-control {
-  // width: 100px;
   padding: 5px 15px;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 0.5rem;
+  text-decoration: none;
   cursor: pointer;
-
-  &.submit {
+  &.green {
     color: white;
     background-color: $cGreen;
     border: 2px solid #003300;
   }
+  &.orange {
+    color: white;
+    background-color: $cOrange;
+    border: 2px solid #ff6600;
+  }
 }
-
 
 .image-display {
   border-radius: 50%;
   border: 3px solid gray;
   width: 65px;
   height: 65px;
+}
+
+.info-label {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  &.men {
+    color: $cMen;
+  }
+  &.women {
+    color: $cWomen;
+  }
+}
+
+.balloon {
+  text-align: center;
+  font-weight: bold;
+  color: #000;
+  &.toilet-name {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: $cOrange;
+  }
+}
+
+.right {
+  text-align: right;
 }

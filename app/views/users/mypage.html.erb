@@ -1,0 +1,74 @@
+<h1><%= current_user.user_name %>さんのマイページ</h1>
+<div class="page-flame">
+  <div class="page-control center">
+    <% if current_user.image.attached? %>
+      <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
+    <% else %>
+      <img src="assets/default_image.png" class="image-display">
+    <% end %>
+  </div>
+
+  <table class="page-control center">
+    <tr>
+      <td>
+        <div class="page-control table-left">名前：</div>
+      </td>
+      <td>
+        <div class="page-control table-right"><%= current_user.user_name %></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="page-control table-left">メールアドレス：</div>
+      </td>
+      <td>
+        <div class="page-control table-right"><%= current_user.email %></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="page-control table-left">ユーザー登録日：</div>
+      </td>
+      <td>
+        <div class="page-control table-right"><%= current_user.created_at.strftime("%Y年%-m月%-d日") %></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="page-control table-left">情報最終更新日：</div>
+      </td>
+      <td>
+        <div class="page-control table-right"><%= current_user.updated_at.strftime("%Y年%-m月%-d日") %></div>
+      </td>
+    </tr>
+  </table>
+
+  <p class="page-control center"><%= link_to 'ユーザー情報の変更', '/users/edit/', :class => 'btn-control orange' %></p>
+
+<hr>
+
+
+  <p class="info-label">◆ 登録済トイレ一覧 ◆</p>
+  <table class="page-control center">
+    <thead>
+      <tr>
+        <th>トイレ名称</th>
+        <th>登録日</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @toilets.each do |toilet| %>
+        <% if toilet.user_id == current_user.id %>
+          <tr>
+            <td><%= link_to toilet.toilet_name, toilet %></td>
+            <td><%= toilet.created_at.strftime("%Y年%-m月%-d日") %></td>
+            <td><%= link_to '編集', edit_toilet_path(toilet) %></td>
+            <td><%= link_to '削除', toilet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

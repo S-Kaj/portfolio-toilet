@@ -127,12 +127,6 @@
 <h2>gmap</h2>
 <div id='map_index'></div>
 
-<style>
-#map_index {
-  height: 400px;
-}
-</style>
-
 <script>
 // マップを生成
 function initMap(){
@@ -153,7 +147,7 @@ function initMap(){
 
     // マーカーをクリックした時に吹き出しを表示する
     let infoWindow = new google.maps.InfoWindow({
-      content: '<h3><%= link_to toilet.toilet_name, toilet %></h3><br>営業時間:<%= toilet.open_time.strftime( "%H:%M" ) %>-<%= toilet.close_time.strftime( "%H:%M" ) %>'
+      content: '<%= link_to toilet.toilet_name, toilet, :class => 'balloon toilet-name' %><p class="balloon">営業時間:<%= toilet.open_time.strftime( "%H:%M" ) %>-<%= toilet.close_time.strftime( "%H:%M" ) %></p>'
     });
     marker.addListener('click', () => {
       infoWindow.open(map, marker);

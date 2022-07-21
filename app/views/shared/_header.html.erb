@@ -9,7 +9,6 @@
         <% if user_signed_in? %>
           <p>
             ようこそ！<%= current_user.user_name %>さん
-
             <br>
             <%= link_to 'ログアウト', '/users/sign_out/', method: :delete %>
           </p>
@@ -22,9 +21,13 @@
       </div>
       <div class="header upper right">
         <% if current_user.image.attached? %>
-          <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
+          <a href="/users/mypage/">
+            <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
+          </a>
         <% else %>
-          <img src="assets/default_image.png" class="image-display">
+          <a href="/users/mypage/">
+            <img src="assets/default_image.png" class="image-display">
+          </a>
         <% end %>
       </div>
     </div>
@@ -34,7 +37,7 @@
       <p><%= link_to 'トイレ情報の登録', '/toilets/new/' %></p>
     </div>
     <div class="header lower menu">
-      <p><%= link_to '登録済トイレ一覧', '/toilets/myposts/' %></p>
+      <p><%= link_to 'マイページ', '/users/mypage/' %></p>
     </div>
     <div class="header lower menu">
       <p><%= link_to 'ユーザー設定', '/users/edit/' %></p>

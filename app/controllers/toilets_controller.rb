@@ -3,11 +3,10 @@ class ToiletsController < ApplicationController
 
   # GET /toilets or /toilets.json
   def index
-    # binding.pry
-    # @toilets = Toilet.all
     @toilets = Toilet.order("created_at DESC").limit(10)
     @users = User.all
     gon.toilets = @toilets
+    # binding.pry
   end
 
   # GET /toilets/1 or /toilets/1.json
@@ -15,15 +14,21 @@ class ToiletsController < ApplicationController
     @toilet = Toilet.find(params[:id])
     gon.latitude = @toilet.latitude
     gon.longtitude = @toilet.longtitude
+    # @user = User.find(params[:id])
+    @user = User.find(@toilet.user_id)
+    # binding.pry
   end
 
   # GET /toilets/new
   def new
     @toilet = Toilet.new
+    # binding.pry
   end
 
   # GET /toilets/1/edit
   def edit
+    @toilet = Toilet.find(params[:id])
+    @user = User.find(@toilet.user_id)
   end
 
   # POST /toilets or /toilets.json
@@ -62,10 +67,6 @@ class ToiletsController < ApplicationController
       format.html { redirect_to toilets_url, notice: "Toilet was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def myposts
-    @toilets = Toilet.all
   end
 
   private

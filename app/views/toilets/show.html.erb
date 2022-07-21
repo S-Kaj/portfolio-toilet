@@ -1,14 +1,18 @@
 <p id="notice"><%= notice %></p>
-
 <h1><%= @toilet.toilet_name %></h1>
-
-<div class="form-flame">
-
-  <table>
+<div class="right">
+  <strong>登録者</strong>
+  <%= @user.user_name %>
+  <strong>登録日</strong>
+  <%= @toilet.created_at.strftime("%Y年%-m月%-d日") %>
+</div>
+<div class="page-flame">
+  <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+  <table class="toilet-table">
     <tr>
-      <td class="item men">男性用</td>
-      <td class="item">メニュー</td>
-      <td class="item women">女性用</td>
+      <td class="item men-label">男性用</td>
+      <td class="item"></td>
+      <td class="item women-label">女性用</td>
     </tr>
     <tr>
       <td class="item men"><%= @toilet.m_urinal %></td>
@@ -41,64 +45,36 @@
         <% end %>
       </td>
     </tr>
-
   </table>
-
-  <div class="field">
-    <strong>多目的トイレ</strong>
-    <% if @toilet.multipurpose == true %>
-    ○
-    <% else %>
-    ×
-    <% end %>
-  </div>
-
-  <div class="field">
-    <strong>小便器</strong>
-    <%= @toilet.m_urinal %>
-  </div>
-
-  <div class="field">
-    <strong>個室</strong>
-    <%= @toilet.m_room %>
-  </div>
-
-  <div class="field">
-    <strong>ウォシュレット</strong>
-    <% if @toilet.m_washlet == true %>
-    ○
-    <% elsif @toilet.m_room == nil %>
-    ?
-    <% else %>
-    ×
-    <% end %>
-  </div>
-
-  <div class="field">
-    <strong>個室</strong>
-    <%= @toilet.w_room %>
-  </div>
-
-  <div class="field">
-    <strong>ウォシュレット</strong>
-    <% if @toilet.w_washlet == true %>
-    ○
-    <% elsif @toilet.w_room == nil %>
-    ?
-    <% else %>
-    ×
-    <% end %>
-  </div>
-
-  <div class="field">
-    <strong>使用可能時間</strong>
-    <%= @toilet.open_time.strftime( "%H:%M" ) %>-<%= @toilet.close_time.strftime( "%H:%M" ) %>
-  </div>
-
-  <div class="field">
-    <strong>備考</strong>
-    <%= @toilet.remark %>
-  </div>
+  <table class="toilet-table">
+    <tr>
+      <td class="item">多目的トイレ</td>
+      <td class="item white">
+        <% if @toilet.multipurpose == true %>
+        ○
+        <% else %>
+        ×
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td class="item">使用可能時間</td>
+      <td class="item white">
+        <%= @toilet.open_time.strftime( "%H:%M" ) %>-<%= @toilet.close_time.strftime( "%H:%M" ) %>
+      </td>
+    </tr>
+    <tr>
+      <td class="item">備考</td>
+      <td class="item white">
+        <%= @toilet.remark %>
+      </td>
+    </tr>
+  </table>
+  <% if current_user.id == @user.id %>
+    <div class="actions">
+      <%= link_to '編集する', edit_toilet_path(@toilet), :class => 'btn-control orange' %>
+    </div>
+  <% end %>
 </div>
 
 
@@ -112,39 +88,28 @@
   <%= @toilet.longtitude %>
 </p>
 
-
 <input type="hidden" id="xyz" value="<%= @latlng %>">
 
 <!-- 以下、GoogleMAP API部分 -->
-<style>
-/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
-#map {
-  height: 400px;
-  width: 600px;
-}
-</style>
-
-<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
-
 <script>
-let map;
-const latitude = gon.latitude;
-const longtitude = gon.longtitude;
-function initMap() {
-  let myLatlng = new google.maps.LatLng(latitude, longtitude);
-  //インスタンスを作成
-  map = new google.maps.Map(document.getElementById('map'), {
-    //地図のオプション
-    //初期のズームレベル
-    zoom: 17,
-    //地図の中心点
-    center: myLatlng
-  });
-  //マーカーの初期プロパティを指定
-  marker = new google.maps.Marker({
-    position: myLatlng,
-    map: map
-  });
-}
+  let map;
+  const latitude = gon.latitude;
+  const longtitude = gon.longtitude;
+  function initMap() {
+    let myLatlng = new google.maps.LatLng(latitude, longtitude);
+    //インスタンスを作成
+    map = new google.maps.Map(document.getElementById('map'), {
+      //地図のオプション
+      //初期のズームレベル
+      zoom: 16,
+      //地図の中心点
+      center: myLatlng
+    });
+    //マーカーの初期プロパティを指定
+    marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map
+    });
+  }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>

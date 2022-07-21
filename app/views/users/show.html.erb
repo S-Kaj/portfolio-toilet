@@ -1,0 +1,27 @@
+<h1><%= @user.user_name %>さんの登録したトイレ情報一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>登録年月</th>
+      <th>トイレ名称</th>
+      <th>営業時間</th>
+      <th>備考</th>
+      <th>User_id</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @toilet.created_at.strftime("%Y年%-m月%-d日") %></td>
+      <td><%= link_to @toilet.toilet_name, @toilet %></td>
+      <td>
+        <span>
+          <%= @toilet.open_time.strftime( "%H:%M" ) %>-<%= @toilet.close_time.strftime( "%H:%M" ) %>
+        </span>
+      </td>
+      <td><%= @toilet.remark %></td>
+      <td><%= @toilet.user_id %></td>
+    </tr>
+  </tbody>
+</table>

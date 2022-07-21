@@ -17,34 +17,48 @@
       <%= form.text_field :toilet_name, :class => 'form-control' %>
     </div>
 
+    <label class="required">場所の指定</label>
+    <br>
+    <i>※マップ上をクリックしてピンを置くことで場所が指定されます</i>
+    <div id="map"></div>
+
+    <div class="form-flame men">
+      <p class="info-label men">◆ 男性用トイレの情報 ◆</p>
+      <hr class="men">
+      <div class="field">
+        <%= form.label :m_urinal %>
+        <%= form.number_field :m_urinal, :class => 'form-control number' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :room %>
+        <%= form.number_field :m_room, :class => 'form-control number' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :washlet %>
+        <%= form.check_box :m_washlet %>
+      </div>
+    </div>
+
+    <div class="form-flame women">
+      <p class="info-label women">◆ 女性用トイレの情報 ◆</p>
+      <hr class="women">
+
+      <div class="field">
+        <%= form.label :room %>
+        <%= form.number_field :w_room, :class => 'form-control number' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :washlet %>
+        <%= form.check_box :w_washlet %>
+      </div>
+    </div>
+
     <div class="field">
       <%= form.label :multipurpose %>
       <%= form.check_box :multipurpose %>
-    </div>
-
-    <div class="field">
-      <%= form.label :m_urinal %>
-      <%= form.number_field :m_urinal, :class => 'form-control number' %>
-    </div>
-
-    <div class="field">
-      <%= form.label :room %>
-      <%= form.number_field :m_room, :class => 'form-control number' %>
-    </div>
-
-    <div class="field">
-      <%= form.label :washlet %>
-      <%= form.check_box :m_washlet %>
-    </div>
-
-    <div class="field">
-      <%= form.label :room %>
-      <%= form.number_field :w_room, :class => 'form-control number' %>
-    </div>
-
-    <div class="field">
-      <%= form.label :washlet %>
-      <%= form.check_box :w_washlet %>
     </div>
 
     <div class="field">
@@ -66,21 +80,14 @@
     </div>
 
     <div class="actions">
-      <%= form.submit '登録する', :class => 'btn-control submit' %>
+      <%= form.submit '登録する', :class => 'btn-control green' %>
     </div>
   <% end %>
 </div>
 
 <!-- 以下、GoogleMAP API部分 -->
-<style>
-/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
-#map {
-  height: 400px;
-  width: 600px;
-}
-</style>
 
-<div id="map"></div>
+
 
 <script>
 //let map;
