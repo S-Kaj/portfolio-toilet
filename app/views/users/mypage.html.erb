@@ -1,14 +1,10 @@
-<a href="/">
-  <img src="assets/logo.png" class="image-logo">
-</a>
-
 <h1><%= current_user.user_name %>さんのマイページ</h1>
 <div class="page-flame">
   <div class="page-control center">
     <% if current_user.image.attached? %>
       <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
     <% else %>
-      <img src="assets/default_image.png" class="image-display">
+      <%= image_tag 'default_image.png', class:'image-display' %>
     <% end %>
   </div>
 

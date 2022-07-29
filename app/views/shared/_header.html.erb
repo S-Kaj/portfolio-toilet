@@ -1,9 +1,9 @@
 <div class="header-base">
   <div class="header">
     <div class="header left">
-      <a href="/">
-        <img src="assets/logo.png" class="image-logo">
-      </a>
+      <%= link_to root_path do %>
+        <%= image_tag 'logo.png', class: 'image-logo' %>
+      <% end %>
     </div>
     <div class="header right">
       <% if user_signed_in? %>
@@ -16,13 +16,13 @@
         </div>
         <div class="header right icon">
           <% if current_user.image.attached? %>
-            <a href="/users/mypage/">
+            <%= link_to mypage_users_path do %>
               <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
-            </a>
+            <% end %>
           <% else %>
-            <a href="/users/mypage/">
-              <img src="assets/default_image.png" class="image-display">
-            </a>
+            <%= link_to mypage_users_path do %>
+              <%= image_tag 'default_image.png', class: 'image-display' %>
+            <% end %>
           <% end %>
         </div>
       <% else %>
