@@ -20,44 +20,45 @@ $cGray: #636363;
 $cMen: #0055ff;
 $cWomen: #ff0055;
 
-#header {
-  margin: -34px -34px 0 -34px;
+.header-base {
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  top: 0px;
+  left: 0px;
 }
 
 .header {
-  background-color: gray;
-  &.upper {
+  background-color: #e3ffe3;
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  &.left {
+    width: 300px;
+  }
+  &.right {
+    line-height: 0.5;
+    width: 250px;
+    font-weight: bold;
     display: flex;
-    justify-content: space-between;
-    height: 80px;
-    &.left {
-      background-color: orange;
-      top: 0;
-      width: 300px;
+    justify-content: end;
+    &.name {
+      padding-right: 10px;
+      width: 160px;
+      height: 80px;
     }
-    &.right {
-      line-height: 0.5;
-      background-color: orange;
-      top: 0;
-      width: 300px;
+    &.icon {
+      margin: 5px;
+      width: 70px;
+      height: 70px;
     }
   }
-  &.lower {
-    text-align: center;
-    &.menu {
-      margin: 0 auto;
-      margin-bottom: -10px;
-      background-color: yellow;
-      display: inline-block;
-      width: 19%;
-      height: 30px;
-      & p {
-        font-weight: bold;
-      }
-    }
-  }
-
 }
+
+.blank {
+  padding-top: 100px;
+}
+
 
 label {
   display: inline-block;
@@ -230,6 +231,10 @@ label {
   height: 65px;
 }
 
+.image-logo {
+  max-width: 100%;
+}
+
 .info-label {
   text-align: center;
   font-size: 1.2rem;
@@ -253,6 +258,6 @@ label {
   }
 }
 
-.right {
-  text-align: right;
-}
+// .right {
+//   text-align: right;
+// }

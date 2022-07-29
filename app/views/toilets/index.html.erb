@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <hr>
+  <p><%= link_to 'トイレ情報の登録', '/toilets/new/' %></p>
+  <p><%= link_to 'マイページ', '/users/mypage/' %></p>
+  <p><%= link_to 'ユーザー設定', '/users/edit/' %></p>
+<hr>
   <% if user_signed_in? %>
     <p>
       ようこそ！<%= current_user.user_name %>さん
