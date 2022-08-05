@@ -1,12 +1,12 @@
 class ToiletsController < ApplicationController
   before_action :set_toilet, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index]
 
   # GET /toilets or /toilets.json
   def index
     @toilets = Toilet.order("created_at DESC").limit(10)
     @users = User.all
     gon.toilets = @toilets
-    # binding.pry
   end
 
   # GET /toilets/1 or /toilets/1.json
@@ -14,15 +14,12 @@ class ToiletsController < ApplicationController
     @toilet = Toilet.find(params[:id])
     gon.latitude = @toilet.latitude
     gon.longtitude = @toilet.longtitude
-    # @user = User.find(params[:id])
     @user = User.find(@toilet.user_id)
-    # binding.pry
   end
 
   # GET /toilets/new
   def new
     @toilet = Toilet.new
-    # binding.pry
   end
 
   # GET /toilets/1/edit

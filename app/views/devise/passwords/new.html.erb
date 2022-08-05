@@ -1,20 +1,17 @@
 <h1>パスワードの再発行</h1>
-
-<div class="form-flame">
+<section class="form-flame">
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-
     <div class="field">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: 'email', :class => 'form-control' %>
     </div>
-
-    <div class="actions">
-      <%= f.submit "パスワードの再発行", :class => 'btn-control submit' %>
-    </div>
+    <div class="line-space"></div>
+    <p class="page-control center">
+      <%= f.submit "パスワードの再発行", :class => 'btn-control green' %>
+    </p>
   <% end %>
-
   <div class="form-other">
-    <%= render 'devise/shared/links'  %>
+    <%= render 'devise/shared/links' %>
   </div>
-</div>
+</section>

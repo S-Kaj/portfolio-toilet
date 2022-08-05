@@ -86,13 +86,11 @@
     let myLatlng = new google.maps.LatLng(latitude, longtitude);
     //インスタンスを作成
     map = new google.maps.Map(document.getElementById('map'), {
-      //地図のオプション
-      //初期のズームレベル
-      zoom: 16,
-      //地図の中心点
-      center: myLatlng,
-      mapTypeControl: false,     //オプション
-      streetViewControl: false   //オプション
+      center: myLatlng,         //地図の中心点
+      zoom: 16,                 //ズームレベル
+      mapTypeControl: false,    //地図タイプ選択(地図or航空写真)の無効化
+      streetViewControl: false, //ストリートビュー切り替えの無効化
+      fullscreenControl: false  //全画面表示の無効化
     });
     //マーカーの初期プロパティを指定
     marker = new google.maps.Marker({

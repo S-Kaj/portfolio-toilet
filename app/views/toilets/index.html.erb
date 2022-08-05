@@ -51,15 +51,14 @@
 
 <!-- 以下、GooglemapAPIテスト記述 -->
 <script>
-// マップを生成
 function initMap(){
   let map = new google.maps.Map(document.getElementById('map_index'), {
-    center: { lat: 35.681, lng: 139.767 }, //マップの中心
-    zoom: 12,                  //マップの解析度
-    mapTypeControl: false,     //オプション
-    streetViewControl: false   //オプション
+    center: { lat: 35.681, lng: 139.767 },  //地図の中心点
+    zoom: 12,                               //ズームレベル
+    mapTypeControl: false,                  //地図タイプ選択(地図or航空写真)の無効化
+    streetViewControl: false,               //ストリートビュー切り替えの無効化
+    fullscreenControl: false                //全画面表示の無効化
   });
-
   // 複数マーカーの作成
   <% @toilets.each do |toilet| %>
   (function() {
@@ -67,7 +66,6 @@ function initMap(){
       position: {lat: <%= toilet.latitude %>, lng: <%= toilet.longtitude %>},
       map: map,
     });
-
     // マーカーをクリックした時に吹き出しを表示する
     let infoWindow = new google.maps.InfoWindow({
       content: '<%= link_to toilet.toilet_name, toilet, :class => 'balloon toilet-name' %><p class="balloon">営業時間:<%= toilet.open_time.strftime( "%H:%M" ) %>-<%= toilet.close_time.strftime( "%H:%M" ) %></p>'
@@ -75,7 +73,6 @@ function initMap(){
     marker.addListener('click', () => {
       infoWindow.open(map, marker);
     });
-
   })();
   <% end %>
 }
