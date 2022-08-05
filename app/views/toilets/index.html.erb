@@ -30,7 +30,13 @@
       <% @toilets.each do |toilet| %>
         <tr>
           <td><%= toilet.created_at.strftime("%Y年%-m月%-d日") %></td>
-          <td><%= link_to toilet.toilet_name, toilet %></td>
+          <td>
+            <% if user_signed_in? %>
+              <%= link_to toilet.toilet_name, toilet %>
+            <% else %>
+              <%= toilet.toilet_name %>
+            <% end %>
+          </td>
           <td>
             <span>
               <%= toilet.open_time.strftime( "%H:%M" ) %>-<%= toilet.close_time.strftime( "%H:%M" ) %>
@@ -40,13 +46,20 @@
       <% end %>
     </tbody>
   </table>
+  <% unless user_signed_in? %>
+    <p class="warning-messeage">※ユーザー登録をすると詳細情報が見られます！！</p>
+    <p class="page-control center"><%= link_to '新規ユーザー登録', '/users/sign_up/', :class => 'btn-control orange' %></p>
+  <% end %>
+  <div class="line-space"></div>
   <hr>
   <div class="line-space"></div>
   <div class="info-label orange">トイレ情報マップ</div>
   <div class="line-space"></div>
   <div id='map_index'></div>
   <div class="line-space"></div>
-  <p class="page-control center"><%= link_to 'トイレ情報の登録', '/toilets/new/', :class => 'btn-control orange' %></p>
+  <% if user_signed_in? %>
+    <p class="page-control center"><%= link_to 'トイレ情報の登録', '/toilets/new/', :class => 'btn-control orange' %></p>
+  <% end %>
 </section>
 
 <!-- 以下、GooglemapAPIテスト記述 -->

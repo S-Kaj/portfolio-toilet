@@ -49,6 +49,7 @@ $cShadow: #232323;
       padding-right: 5px;
       width: 160px;
       height: 80px;
+      text-align: right;
     }
     &.icon {
       margin: 5px 10px 5px 5px;
@@ -278,6 +279,14 @@ label {
   &.women {
     color: $cWomen;
   }
+}
+
+.warning-messeage {
+  color: red;
+  font-size: 1rem;
+  font-weight: bold;
+  // font-style: italic;
+  text-align: center;
 }
 
 .balloon {
