@@ -1,5 +1,5 @@
 <h1><%= current_user.user_name %>さんのマイページ</h1>
-<div class="page-flame">
+<section class="page-flame">
   <div class="page-control center">
     <% if current_user.image.attached? %>
       <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
@@ -7,7 +7,6 @@
       <%= image_tag 'default_image.png', class:'image-display' %>
     <% end %>
   </div>
-
   <table class="page-control center">
     <tr>
       <td>
@@ -42,13 +41,11 @@
       </td>
     </tr>
   </table>
-
+  <div class="line-space"></div>
   <p class="page-control center"><%= link_to 'ユーザー情報の変更', '/users/edit/', :class => 'btn-control orange' %></p>
-
-<hr>
-
-
-  <p class="info-label">◆ 登録済トイレ一覧 ◆</p>
+  <div class="line-space"></div>
+  <hr>
+  <p class="info-label orange">登録済トイレ一覧</p>
   <table class="page-control center">
     <thead>
       <tr>
@@ -57,7 +54,6 @@
         <th colspan="2"></th>
       </tr>
     </thead>
-
     <tbody>
       <% @toilets.each do |toilet| %>
         <% if toilet.user_id == current_user.id %>
@@ -71,4 +67,6 @@
       <% end %>
     </tbody>
   </table>
-</div>
+  <div class="line-space"></div>
+  <p class="page-control center"><%= link_to 'トイレ情報の登録', '/toilets/new/', :class => 'btn-control orange' %></p>
+</section>

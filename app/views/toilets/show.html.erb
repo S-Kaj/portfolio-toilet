@@ -6,8 +6,8 @@
   <strong>登録日</strong>
   <%= @toilet.created_at.strftime("%Y年%-m月%-d日") %>
 </div>
-<div class="page-flame">
-  <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<section class="page-flame">
+  <div id="map"></div>
   <table class="toilet-table">
     <tr>
       <td class="item men-label">男性用</td>
@@ -75,18 +75,7 @@
       <%= link_to '編集する', edit_toilet_path(@toilet), :class => 'btn-control orange' %>
     </div>
   <% end %>
-</div>
-
-<%= link_to 'Edit', edit_toilet_path(@toilet) %> |
-<%= link_to 'Back', toilets_path %>
-
-<p>
-  <strong>取得した経度と緯度</strong>
-  <%= @toilet.latitude %>
-  <%= @toilet.longtitude %>
-</p>
-
-<input type="hidden" id="xyz" value="<%= @latlng %>">
+</section>
 
 <!-- 以下、GoogleMAP API部分 -->
 <script>
@@ -101,7 +90,9 @@
       //初期のズームレベル
       zoom: 16,
       //地図の中心点
-      center: myLatlng
+      center: myLatlng,
+      mapTypeControl: false,     //オプション
+      streetViewControl: false   //オプション
     });
     //マーカーの初期プロパティを指定
     marker = new google.maps.Marker({
