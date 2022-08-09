@@ -32,7 +32,7 @@ $cShadow: #232323;
 }
 
 .header {
-  background-color: #e3ffe3;
+  background-color: #beedff;
   display: flex;
   justify-content: space-between;
   height: 80px;
@@ -99,7 +99,7 @@ label {
       font-weight: 600;
       padding: 4px;
       margin-left: 5px;
-      color: white;
+      color: #fff;
       background-color: red;
     }
   }
@@ -145,7 +145,7 @@ label {
 }
 
 .form-flame {
-  margin: 0 auto;
+  margin: 0 auto 30px;
   max-width: 600px;
   padding: 30px 10%;
   border: 3px dashed $cGreen;
@@ -241,14 +241,19 @@ label {
   box-shadow: 0 0 5px 0 $cShadow;
   cursor: pointer;
   &.green {
-    color: white;
+    color: #fff;
     background-color: $cGreen;
     border: 2px solid #003300;
   }
   &.orange {
-    color: white;
+    color: #fff;
     background-color: $cOrange;
     border: 2px solid #ff6600;
+  }
+  &.blue {
+    color: #000;
+    background-color: #beedff;
+    border: 2px solid #5050ff;
   }
 }
 
