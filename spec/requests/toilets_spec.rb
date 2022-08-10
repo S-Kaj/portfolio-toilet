@@ -13,7 +13,6 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/toilets", type: :request do
-  
   # Toilet. As you add validations to Toilet, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {

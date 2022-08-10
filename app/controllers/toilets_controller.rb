@@ -1,5 +1,5 @@
 class ToiletsController < ApplicationController
-  before_action :set_toilet, only: %i[ show edit update destroy ]
+  before_action :set_toilet, only: %i(show edit update destroy)
   before_action :authenticate_user!, except: [:index]
 
   # GET /toilets or /toilets.json
@@ -67,13 +67,16 @@ class ToiletsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_toilet
-      @toilet = Toilet.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def toilet_params
-      params.require(:toilet).permit(:toilet_name, :latitude, :longtitude, :multipurpose, :m_urinal, :m_room, :m_washlet, :w_room, :w_washlet, :open_time, :close_time, :remark, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_toilet
+    @toilet = Toilet.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def toilet_params
+    params.require(:toilet).permit(:toilet_name, :latitude, :longtitude, :multipurpose,
+                                   :m_urinal, :m_room, :m_washlet, :w_room, :w_washlet,
+                                   :open_time, :close_time, :remark, :user_id)
+  end
 end
