@@ -1,16 +1,17 @@
 FactoryBot.define do
   factory :toilet do
-    toilet_name { "MyString" }
-    latitude { 1.5 }
-    longtitude { 1.5 }
+    toilet_name { Faker::Address.unique.city }
+    latitude { Faker::Number.between(from: 20, to: 46) }
+    longtitude { Faker::Number.between(from: 123, to: 154) }
     multipurpose { false }
-    m_urinal { 1 }
-    m_room { 1 }
+    m_urinal { Faker::Number.between(from: 1, to: 20) }
+    m_room { Faker::Number.between(from: 1, to: 10) }
     m_washlet { false }
-    w_room { 1 }
+    w_room { Faker::Number.between(from: 1, to: 20) }
     w_washlet { false }
-    open_time { "2022-03-14 08:04:26" }
-    close_time { "2022-03-14 08:04:26" }
-    remark { "MyString" }
+    open_time { "08:00:00" }
+    close_time { "22:00:00" }
+    remark { "備考テスト" }
+    association :user
   end
 end
