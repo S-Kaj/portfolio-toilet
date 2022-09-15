@@ -34,7 +34,7 @@ class ToiletsController < ApplicationController
 
     respond_to do |format|
       if @toilet.save
-        format.html { redirect_to toilet_url(@toilet), notice: "Toilet was successfully created." }
+        format.html { redirect_to toilet_url(@toilet), notice: "新しいトイレ情報が登録されました。" }
         format.json { render :show, status: :created, location: @toilet }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class ToiletsController < ApplicationController
   def update
     respond_to do |format|
       if @toilet.update(toilet_params)
-        format.html { redirect_to toilet_url(@toilet), notice: "Toilet was successfully updated." }
+        format.html { redirect_to toilet_url(@toilet), notice: "トイレ情報を更新しました。" }
         format.json { render :show, status: :ok, location: @toilet }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class ToiletsController < ApplicationController
     @toilet.destroy
 
     respond_to do |format|
-      format.html { redirect_to toilets_url, notice: "Toilet was successfully destroyed." }
+      format.html { redirect_to toilets_url, notice: "トイレ情報を削除しました。" }
       format.json { head :no_content }
     end
   end
