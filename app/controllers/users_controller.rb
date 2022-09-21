@@ -3,10 +3,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @toilet = Toilet.find(params[:id])
+    @toilets = Toilet.order("created_at DESC").limit(10)
+    if current_user.id == @user.id
+      redirect_to mypage_users_path
+    end
   end
 
   def mypage
-    @toilets = Toilet.all
+    @toilets = Toilet.order("created_at DESC").limit(5)
   end
 end
