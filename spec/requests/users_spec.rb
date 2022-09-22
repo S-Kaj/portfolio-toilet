@@ -11,7 +11,6 @@ RSpec.describe "Users", type: :request do
   context 'GET mypage_users_path' do
     it 'ステータスコードが200であること' do
       get mypage_users_path
-      binding.pry
       expect(response).to have_http_status(200)
     end
 
