@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   #     get 'myposts'
   #   end
   # end
+  resources :toilets do
+    collection do
+      get 'testpage'
+    end
+  end
 
   resources :toilets
   devise_for :users

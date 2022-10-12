@@ -20,9 +20,9 @@ RSpec.describe "Toilets", type: :system do
     # 各種項目を入力
     fill_in 'toilet[toilet_name]', with: 'テストトイレ'
     # マップ上をクリックさせるにはどうしたら良い？(hiddenに値をセットすることで代用)
-    find('#map_lat', visible: false).set(100)
-    find('#map_lng', visible: false).set(100)
-    # find('#map', visible: false).click
+    # find('#map_lat', visible: false).set(100)
+    # find('#map_lng', visible: false).set(100)
+    find('div#map', visible: false).click
     # move_by(880, 480).click
     # find('area', visible: false).click
 # binding.pry
@@ -39,7 +39,8 @@ RSpec.describe "Toilets", type: :system do
     fill_in 'toilet[remark]', with: '備考テスト'
     # 「登録する」ボタンを押下
     click_button '登録する'
-binding.pry
+# binding.pry
     expect(page).to have_content '新しいトイレ情報が登録されました。'
+    puts page.driver.browser.manage.logs.get(:browser)
   end
 end

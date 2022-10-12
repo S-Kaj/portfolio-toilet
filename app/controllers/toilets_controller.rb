@@ -9,6 +9,9 @@ class ToiletsController < ApplicationController
     gon.toilets = @toilets
   end
 
+  def testpage
+  end
+
   # GET /toilets/1 or /toilets/1.json
   def show
     @toilet = Toilet.find(params[:id])

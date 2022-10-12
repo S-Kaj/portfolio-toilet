@@ -6,7 +6,17 @@ RSpec.describe "Maps", type: :system do
 
   scenario 'GoogleMAPが表示されていること', js: true do
     visit root_path
+    click_link 'ログイン'
+    fill_in 'user[email]', with: 'test@example.com'
+    fill_in 'user[password]', with: '12345678'
+    click_button 'ログイン'
+    # binding.pry
+    # expect(page).to have_selector 'map_index'
+    # puts page.driver.browser.manage.logs.get(:browser)
     binding.pry
-    expect(page).to have_selector 'map'
+    # expect(page).to have_selector('div#map_index', visible: false)
+    expect(page).to have_selector 'div#map_index'
+    # click_button 'ボタンを押してください'
+    # expect(page).not_to have_selector 'map_index'
   end
 end

@@ -66,7 +66,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  # gem 'webdrivers'
+  gem 'webdrivers'
   # gem 'webdrivers', require: !ENV['SELENIUM_REMOTE_URL']
   gem 'launchy', '~> 2.4.3'
   gem 'faker'
