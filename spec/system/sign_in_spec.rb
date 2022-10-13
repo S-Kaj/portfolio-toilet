@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "SignIns", type: :feature do
+RSpec.describe "SignIns", type: :system do
   let!(:user) { create(:user, email: 'test@example.com', password: '12345678', password_confirmation: '12345678') }
 
   scenario '既存ユーザーがログインおよびログアウトに成功すること' do

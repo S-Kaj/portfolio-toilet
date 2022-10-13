@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "SignUps", type: :feature do
+RSpec.describe "SignUps", type: :system do
   scenario 'ユーザーの新規登録に成功すること' do
     visit root_path
     find('#sign_up').click

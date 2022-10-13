@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "Toilets", type: :feature do
+# RSpec.describe "Toilets", type: :system, selenium: true do
+RSpec.describe "Toilets", type: :system do
   let!(:user) { create(:user, email: 'test@example.com', password: '12345678', password_confirmation: '12345678') }
 
   scenario "ユーザーが新しいトイレ情報を登録すること" do
