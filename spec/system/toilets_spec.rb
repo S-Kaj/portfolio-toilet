@@ -1,10 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Toilets", type: :system do
+RSpec.describe "Toilets", type: :system, selenium: true do
   let!(:user) { create(:user, email: 'test@example.com', password: '12345678', password_confirmation: '12345678') }
 
-  # scenario "ユーザーが新しいトイレ情報を登録すること", js: true do
-  scenario "ユーザーが新しいトイレ情報を登録すること" do
+  scenario "ユーザーが新しいトイレ情報を登録すること", js: true do
     visit root_path
     # ログインボタンを押す
     click_link 'ログイン'
@@ -17,14 +16,26 @@ RSpec.describe "Toilets", type: :system do
     expect(current_path).to eq root_path
     # 「トイレ情報の登録」ボタンを押下
     click_link 'トイレ情報の登録'
+
+    page.driver.execute_script('return window.location.pathname')
+
+
     # 各種項目を入力
     fill_in 'toilet[toilet_name]', with: 'テストトイレ'
     # マップ上をクリックさせるにはどうしたら良い？(hiddenに値をセットすることで代用)
     # find('#map_lat', visible: false).set(100)
     # find('#map_lng', visible: false).set(100)
-    find('div#map', visible: false).click
-    # move_by(880, 480).click
-    # find('area', visible: false).click
+    # find('div#map', visible: false).click
+
+    page.save_screenshot
+
+    # 指定した座標をクリックする動作
+    page.driver.browser.action
+      .move_to_location(880, 480)
+      .click
+      .perform
+    # ここまで
+
 # binding.pry
     fill_in 'toilet[m_urinal]', with: '4'
     fill_in 'toilet[m_room]', with: '3'
@@ -40,7 +51,7 @@ RSpec.describe "Toilets", type: :system do
     # 「登録する」ボタンを押下
     click_button '登録する'
 # binding.pry
-    expect(page).to have_content '新しいトイレ情報が登録されました。'
-    puts page.driver.browser.manage.logs.get(:browser)
+    # expect(page).to have_content '新しいトイレ情報が登録されました。'
+    # puts page.driver.browser.manage.logs.get(:browser)
   end
 end

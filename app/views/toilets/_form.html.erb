@@ -18,6 +18,14 @@
     <br>
     <i>※マップ上をクリックしてピンを置くことで場所が指定されます</i>
     <div id="map"></div>
+
+    <ul>
+      <li>Latitude <span id="map_lat"></span></li>
+      <li>Longtitude <span id="map_lng"></span></li>
+    </ul>
+    <p id="js-sample"></p>
+
+
     <div class="form-flame men">
       <p class="info-label men">◆ 男性用トイレの情報 ◆</p>
       <hr class="men">
@@ -73,7 +81,16 @@
 
 <!-- 以下、GoogleMAP API部分 -->
 <script>
-//let map;
+// テスト用
+// window.onloadでロード時に実行される
+window.onload = function(){
+  document.getElementById("js-sample").innerHTML = 'JSテスト';
+}
+// ここまで
+
+
+
+// let map;
 function initMap() {
   const myLatlng = { lat: 35.681, lng: 139.767 };
   const map = new google.maps.Map(document.getElementById('map'), {
@@ -93,11 +110,21 @@ function initMap() {
   });
 
   google.maps.event.addListener(map, 'click', (e) => {
+
+// テスト用
+    document.getElementById('map_lat').textContent = e.latLng.lat();
+    document.getElementById('map_lng').textContent = e.latLng.lng();
+// ここまで
+
     document.getElementById("map_lat").value = e.latLng.lat();
     document.getElementById("map_lng").value = e.latLng.lng();
     marker.setPosition(e.latLng);
   });
 }
 google.maps.event.addDomListener(window, 'load', initMap);
+
+
+
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>
