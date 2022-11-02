@@ -1,6 +1,7 @@
 <button>ボタンを押してください</button>
 <article>
   <div id="box">クリックで表示が変わります</div>
+  <a href="https://tabelog.com/tokyo/A1310/A131002/13268445/dtlmap/">他サイトGoogleマップ表示確認</a>
 </article>
 
 <script>
@@ -21,3 +22,57 @@ switchBtn.addEventListener('click', ()=> {
   changeElement(box);
 }, false);
 </script>
+
+<p>◆クリックして緯度経度が表示されるGmap◆</p>
+<div id="map"></div>
+<ul>
+  <li>Latitude <span id="map_lat"></span></li>
+  <li>Longtitude <span id="map_lng"></span></li>
+</ul>
+
+<!-- 以下、GoogleMAP API部分 -->
+<style>
+#map {
+  height: 305px;
+  max-width: 540px;
+  margin: 20px auto;
+  border-radius: 0.5rem;
+  border: 3px solid Gray;
+}
+</style>
+
+
+<script>
+function initMap() {
+  let map = new google.maps.Map(document.getElementById('map'), {
+  center: { lat: 35.681, lng: 139.767 },
+  zoom: 12,                 //ズームレベル
+  mapTypeControl: false,    //地図タイプ選択(地図or航空写真)の無効化
+  streetViewControl: false, //ストリートビュー切り替えの無効化
+  fullscreenControl: false,  //全画面表示の無効化
+  //地図上でのカーソルの指定
+  draggableCursor: "crosshair",
+  draggingCursor: "move"
+  });
+
+  let marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map
+  });
+
+  google.maps.event.addListener(map, 'click', (e) => {
+
+// テスト用
+    document.getElementById('map_lat').textContent = e.latLng.lat();
+    document.getElementById('map_lng').textContent = e.latLng.lng();
+// ここまで
+
+    document.getElementById("map_lat").value = e.latLng.lat();
+    document.getElementById("map_lng").value = e.latLng.lng();
+    marker.setPosition(e.latLng);
+  });
+}
+google.maps.event.addDomListener(window, 'load', initMap);
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>

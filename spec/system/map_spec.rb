@@ -10,7 +10,8 @@ RSpec.describe "Maps", type: :system, selenium: true do
     fill_in 'user[email]', with: 'test@example.com'
     fill_in 'user[password]', with: '12345678'
     click_button 'ログイン'
-    binding.pry
+    page.save_screenshot
+    # binding.pry
     # expect(page).to have_selector 'map_index'
     # puts page.driver.browser.manage.logs.get(:browser)
     # binding.pry

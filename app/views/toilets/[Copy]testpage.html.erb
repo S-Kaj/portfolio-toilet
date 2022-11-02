@@ -1,0 +1,45 @@
+<button>ボタンを押してください</button>
+<article>
+  <div id="box">クリックで表示が変わります</div>
+  <a href="https://tabelog.com/tokyo/A1310/A131002/13268445/dtlmap/">他サイトGoogleマップ表示確認</a>
+</article>
+
+<script>
+//ボタン要素を取得
+let switchBtn = document.getElementsByTagName('button')[0];
+//表示・非表示を切り替える要素を取得
+let box = document.getElementById('box');
+//styleのdisplayを変更する関数
+let changeElement = (el)=> {
+  if(el.style.display==''){
+    el.style.display='none';
+  }else{
+    el.style.display='';
+  }
+}
+//上記関数をボタンクリック時に実行
+switchBtn.addEventListener('click', ()=> {
+  changeElement(box);
+}, false);
+</script>
+
+
+<h2>gmap</h2>
+<div id='map_test'></div>
+
+<style>
+#map_test{
+  height: 400px;
+  width: 600px;
+}
+</style>
+
+<script>
+function initMap(){
+  let map = new google.maps.Map(document.getElementById('map_test'), {
+  center: {lat: -34.397, lng: 150.644},
+  zoom: 8
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>

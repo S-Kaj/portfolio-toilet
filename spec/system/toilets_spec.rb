@@ -17,25 +17,18 @@ RSpec.describe "Toilets", type: :system, selenium: true do
     # 「トイレ情報の登録」ボタンを押下
     click_link 'トイレ情報の登録'
 
-    page.driver.execute_script('return window.location.pathname')
+    # page.driver.execute_script('return window.location.pathname')
 
 
     # 各種項目を入力
     fill_in 'toilet[toilet_name]', with: 'テストトイレ'
-    # マップ上をクリックさせるにはどうしたら良い？(hiddenに値をセットすることで代用)
-    # find('#map_lat', visible: false).set(100)
-    # find('#map_lng', visible: false).set(100)
-    # find('div#map', visible: false).click
-
-    page.save_screenshot
-
     # 指定した座標をクリックする動作
     page.driver.browser.action
       .move_to_location(880, 480)
       .click
       .perform
     # ここまで
-
+    page.save_screenshot
 # binding.pry
     fill_in 'toilet[m_urinal]', with: '4'
     fill_in 'toilet[m_room]', with: '3'
@@ -48,10 +41,11 @@ RSpec.describe "Toilets", type: :system, selenium: true do
     select '22', from: 'toilet[close_time(4i)]'
     select '30', from: 'toilet[close_time(5i)]'
     fill_in 'toilet[remark]', with: '備考テスト'
+    page.save_screenshot
     # 「登録する」ボタンを押下
     click_button '登録する'
+    page.save_screenshot
 # binding.pry
-    # expect(page).to have_content '新しいトイレ情報が登録されました。'
-    # puts page.driver.browser.manage.logs.get(:browser)
+    expect(page).to have_content '新しいトイレ情報が登録されました。'
   end
 end

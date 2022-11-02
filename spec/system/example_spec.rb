@@ -16,11 +16,12 @@ RSpec.describe "Toilets", type: :system, selenium: true do
     expect(current_path).to eq root_path
     # 「トイレ情報の登録」ボタンを押下
     click_link 'トイレ情報の登録'
+    visit current_path
     # この時のスクリーンショットを撮る
-    # page.save_screenshot
+    page.save_screenshot
 
     # とりあえず「登録する」を押す(?)
-    click_button '登録する'
+    # click_button '登録する'
 
     # トイレ名称を入力
     fill_in 'toilet[toilet_name]', with: 'テストトイレ'
@@ -35,14 +36,14 @@ RSpec.describe "Toilets", type: :system, selenium: true do
     #   end
     # end
 
-    1.step(1400, 100) do |num_x|
-      300.step(600, 100) do |num_y|
-        page.driver.browser.action
-        .move_to_location(num_x, num_y)
-        .click
-        .perform
-      end
-    end
+    # 1.step(1400, 100) do |num_x|
+    #   300.step(600, 100) do |num_y|
+    #     page.driver.browser.action
+    #     .move_to_location(num_x, num_y)
+    #     .click
+    #     .perform
+    #   end
+    # end
 
 
     # 「登録する」を押す
@@ -50,9 +51,9 @@ RSpec.describe "Toilets", type: :system, selenium: true do
 
 
     # この時のスクリーンショットを撮る
-    # page.save_screenshot
+    page.save_screenshot
 
-    binding.pry
+    # binding.pry
 
     expect(page).to have_text 'JSテスト'
   end
