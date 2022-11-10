@@ -51,16 +51,20 @@
       <td class="item">多目的トイレ</td>
       <td class="item white">
         <% if @toilet.multipurpose == true %>
-        ○
+          ○
         <% else %>
-        ×
+          ×
         <% end %>
       </td>
     </tr>
     <tr>
-      <td class="item">使用可能時間</td>
+      <td class="item">利用可能時間</td>
       <td class="item white">
-        <%= @toilet.open_time.strftime( "%H:%M" ) %>-<%= @toilet.close_time.strftime( "%H:%M" ) %>
+        <% if @toilet.open_time.strftime("%H:%M") == "00:00" && @toilet.close_time.strftime("%H:%M") == "00:00" %>
+          -
+        <% else %>
+          <%= @toilet.open_time.strftime("%H:%M") %> - <%= @toilet.close_time.strftime("%H:%M") %>
+        <% end %>
       </td>
     </tr>
     <tr>
@@ -78,15 +82,20 @@
 </section>
 <p class="page-control center"><%= link_to 'トップへ戻る', root_path, :class => 'btn-control blue' %></p>
 
-<!-- 以下、GoogleMAP API部分 -->
+<!-- 以下、GoogleMAP API関連 -->
+<style>
+#map {
+  height: 305px;
+  max-width: 540px;
+  margin: 20px auto;
+  border-radius: 0.5rem;
+  border: 3px solid #636363;
+}
+</style>
 <script>
-  let map;
-  const latitude = gon.latitude;
-  const longtitude = gon.longtitude;
   function initMap() {
-    let myLatlng = new google.maps.LatLng(latitude, longtitude);
-    //インスタンスを作成
-    map = new google.maps.Map(document.getElementById('map'), {
+    let myLatlng = { lat: gon.latitude, lng: gon.longtitude };
+    let map = new google.maps.Map(document.getElementById('map'), {
       center: myLatlng,         //地図の中心点
       zoom: 16,                 //ズームレベル
       mapTypeControl: false,    //地図タイプ選択(地図or航空写真)の無効化
@@ -94,7 +103,7 @@
       fullscreenControl: false  //全画面表示の無効化
     });
     //マーカーの初期プロパティを指定
-    marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
       position: myLatlng,
       map: map
     });

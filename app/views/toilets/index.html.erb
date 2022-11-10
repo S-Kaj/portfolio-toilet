@@ -39,7 +39,11 @@
           </td>
           <td>
             <span>
-              <%= toilet.open_time.strftime("%H:%M") %>-<%= toilet.close_time.strftime("%H:%M") %>
+              <% if toilet.open_time.strftime("%H:%M") == "00:00" && toilet.close_time.strftime("%H:%M") == "00:00" %>
+                -
+              <% else %>
+                <%= toilet.open_time.strftime("%H:%M") %> - <%= toilet.close_time.strftime("%H:%M") %>
+              <% end %>
             </span>
           </td>
         </tr>
@@ -62,7 +66,15 @@
   <% end %>
 </section>
 
-<!-- 以下、GooglemapAPIテスト記述 -->
+<!-- 以下、GoogleMap API関連 -->
+<style>
+#map_index {
+  height: 400px;
+  max-width: 600px;
+  border-radius: 0.5rem;
+  border: 3px solid #636363;
+}
+</style>
 <script>
 function initMap(){
   let map = new google.maps.Map(document.getElementById('map_index'), {
@@ -72,6 +84,29 @@ function initMap(){
     streetViewControl: false,               //ストリートビュー切り替えの無効化
     fullscreenControl: false                //全画面表示の無効化
   });
+  // 複数マーカーの作成
+  <% @toilets.each do |toilet| %>
+  (function() {
+    let marker = new google.maps.Marker({
+      position: {lat: <%= toilet.latitude %>, lng: <%= toilet.longtitude %>},
+      map: map
+    });
+    // マーカーをクリックした時に吹き出しを表示する
+    let infoWindow = new google.maps.InfoWindow({
+      content: '<%= link_to toilet.toilet_name, toilet, :class => 'balloon toilet-name' %>\
+      <p class="balloon">利用可能時間:\
+      <% if toilet.open_time.strftime("%H:%M") == "00:00" && toilet.close_time.strftime("%H:%M") == "00:00" %>\
+        -\
+      <% else %>\
+        <%= toilet.open_time.strftime("%H:%M") %> - <%= toilet.close_time.strftime("%H:%M") %>\
+      <% end %>\
+      </p>'
+    });
+    marker.addListener('click', () => {
+      infoWindow.open(map, marker);
+    });
+  })();
+  <% end %>
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgk50-Uh4K60ddzGNY5yOcfx4clQMNYNU&callback=initMap" async defer></script>
