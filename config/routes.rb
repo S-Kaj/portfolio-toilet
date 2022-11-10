@@ -1,20 +1,7 @@
 Rails.application.routes.draw do
-  # get 'users/show'
   root to: 'toilets#index'
-  # resources :toilets do
-  #   collection do
-  #     get 'myposts'
-  #   end
-  # end
-  resources :toilets do
-    collection do
-      get 'testpage'
-    end
-  end
-
   resources :toilets
   devise_for :users
-  # resources :users, only: [:show]
   resources :users do
     collection do
       get 'mypage'
