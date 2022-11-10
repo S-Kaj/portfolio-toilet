@@ -7,7 +7,5 @@ ja:
         m_urinal: "小便器の数"
         room: "個室の数"
         washlet: "ウォシュレットの有無"
-        possible_time: "使用可能時間"
-        open_time: "オープン時間"
-        close_time: "クローズ時間"
+        possible_time: "利用可能時間"
         remark: "備考"
