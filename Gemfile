@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rails-erd'
   gem 'rubocop-airbnb'
+  gem 'dotenv-rails'
 end
 
 group :development do
