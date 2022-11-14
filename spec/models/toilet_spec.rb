@@ -18,7 +18,7 @@ RSpec.describe Toilet, type: :model do
       end
 
       it "トイレ名称が31文字以上の場合は無効であること" do
-        toilet = build(:toilet, toilet_name: "a" * 31 , user_id: user.id)
+        toilet = build(:toilet, toilet_name: "a" * 31, user_id: user.id)
         toilet.valid?
         expect(toilet.errors.messages[:toilet_name]).to include("は30文字以内で入力してください")
       end

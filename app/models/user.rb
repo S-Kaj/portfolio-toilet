@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :toilets
   has_one_attached :image
 
-  validates :user_name, presence: true, length: {maximum: 20}, uniqueness:true
+  validates :user_name, presence: true, length: { maximum: 20 }, uniqueness: true
 end
