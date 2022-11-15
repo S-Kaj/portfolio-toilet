@@ -23,6 +23,7 @@ RSpec.describe User, type: :model do
 
       it "ユーザー名が重複する場合は無効であること" do
         user1 = create(:user, user_name: "山田太郎")
+        expect(user1).not_to be nil
         user2 = build(:user, user_name: "山田太郎")
         user2.valid?
         expect(user2.errors.messages[:user_name]).to include("はすでに存在します")
@@ -36,6 +37,7 @@ RSpec.describe User, type: :model do
 
       it "メールアドレスが重複する場合は無効であること" do
         user1 = create(:user, email: "test@example.com")
+        expect(user1).not_to be nil
         user2 = build(:user, email: "test@example.com")
         user2.valid?
         expect(user2.errors.messages[:email]).to include("はすでに存在します")

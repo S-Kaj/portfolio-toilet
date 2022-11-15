@@ -32,6 +32,7 @@ RSpec.describe Toilet, type: :model do
 
     it "重複したトイレ名称では無効であること" do
       toilet1 = create(:toilet, toilet_name: "トイレA", user_id: user.id)
+      expect(toilet1).not_to be nil
       toilet2 = build(:toilet, toilet_name: "トイレA", user_id: user.id)
       toilet2.valid?
       expect(toilet2.errors.messages[:toilet_name]).to include("はすでに存在します")

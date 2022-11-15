@@ -1,0 +1,28 @@
+example_id                             | status | run_time        |
+-------------------------------------- | ------ | --------------- |
+./spec/models/toilet_spec.rb[1:1:1]    | passed | 0.03166 seconds |
+./spec/models/toilet_spec.rb[1:1:2:1]  | passed | 0.02077 seconds |
+./spec/models/toilet_spec.rb[1:1:2:2]  | passed | 0.02109 seconds |
+./spec/models/toilet_spec.rb[1:1:2:3]  | passed | 0.02174 seconds |
+./spec/models/toilet_spec.rb[1:1:3]    | passed | 0.04271 seconds |
+./spec/models/toilet_spec.rb[1:1:4]    | passed | 0.92249 seconds |
+./spec/models/user_spec.rb[1:1:1]      | passed | 1.02 seconds    |
+./spec/models/user_spec.rb[1:1:2:1]    | passed | 0.0111 seconds  |
+./spec/models/user_spec.rb[1:1:2:2]    | passed | 0.01633 seconds |
+./spec/models/user_spec.rb[1:1:2:3]    | passed | 0.02331 seconds |
+./spec/models/user_spec.rb[1:1:2:4]    | passed | 0.00922 seconds |
+./spec/models/user_spec.rb[1:1:2:5]    | passed | 0.02832 seconds |
+./spec/models/user_spec.rb[1:1:2:6]    | passed | 0.01047 seconds |
+./spec/models/user_spec.rb[1:1:2:7]    | passed | 0.01202 seconds |
+./spec/models/user_spec.rb[1:1:2:8]    | passed | 0.01106 seconds |
+./spec/requests/toilets_spec.rb[1:1:1] | passed | 0.10536 seconds |
+./spec/requests/toilets_spec.rb[1:1:2] | passed | 0.09338 seconds |
+./spec/requests/toilets_spec.rb[1:2:1] | passed | 0.08707 seconds |
+./spec/requests/toilets_spec.rb[1:2:2] | passed | 0.08351 seconds |
+./spec/requests/toilets_spec.rb[1:3:1] | passed | 0.08207 seconds |
+./spec/requests/toilets_spec.rb[1:4:1] | passed | 0.11627 seconds |
+./spec/requests/users_spec.rb[1:1:1]   | passed | 0.09887 seconds |
+./spec/requests/users_spec.rb[1:1:2]   | passed | 0.1515 seconds  |
+./spec/system/sign_in_spec.rb[1:1]     | passed | 0.31259 seconds |
+./spec/system/sign_up_spec.rb[1:1]     | passed | 0.39601 seconds |
+./spec/system/toilets_spec.rb[1:1]     | passed | 19.23 seconds   |
