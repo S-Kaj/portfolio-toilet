@@ -18,10 +18,7 @@ RSpec.describe "Toilets", type: :system, selenium: true do
     # 各種項目の入力
     fill_in 'toilet[toilet_name]', with: 'テストトイレ'
     # Googleマップ上にピンを置く
-    page.driver.browser.action
-      .move_to_location(880, 480)
-      .click
-      .perform
+    page.driver.browser.action.move_to_location(880, 480).click.perform
     # その他各種項目の入力
     fill_in 'toilet[m_urinal]', with: '4'
     fill_in 'toilet[m_room]', with: '3'
