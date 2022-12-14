@@ -59,6 +59,12 @@
   <div class="line-space"></div>
   <div class="info-label orange">トイレ情報マップ</div>
   <div class="line-space"></div>
+  <input
+  id="pac-input_index"
+  class="controls"
+  type="text"
+  placeholder="場所を検索"
+  />
   <div id='map_index'></div>
   <div class="line-space"></div>
   <% if user_signed_in? %>
@@ -74,9 +80,16 @@
   border-radius: 0.5rem;
   border: 3px solid #636363;
 }
+
+#pac-input_index {
+  height: 30px;
+  font-size: 1.1rem;
+  text-align: center;
+  border: 3px solid #fc9816;
+}
 </style>
 <script>
-function initMap(){
+function initAutocomplete() {
   let map = new google.maps.Map(document.getElementById('map_index'), {
     center: { lat: 35.681, lng: 139.767 },  //地図の中心点
     zoom: 12,                               //ズームレベル
@@ -107,6 +120,60 @@ function initMap(){
     });
   })();
   <% end %>
+
+  // ここから検索窓に関する記述
+  const input = document.getElementById("pac-input_index");
+  const searchBox = new google.maps.places.SearchBox(input);
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  map.addListener("bounds_changed", () => {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  let markers = [];
+  searchBox.addListener("places_changed", () => {
+  // "place_chaged"イベントはAutoCompleteクラスのイベント.
+    const places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    markers.forEach((marker) => {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    const bounds = new google.maps.LatLngBounds();
+    // "LatLngBounds"クラスは境界を作るインスンタンスを作成。引数は左下、右上の座標。
+    places.forEach((place) => {
+      if (!place.geometry) {
+        ////"geometry"はplaceライブラリのメソッド。
+        console.log("Returned place contains no geometry");
+        return;
+      }
+
+      markers.push(
+        new google.maps.Marker({
+          map,
+          title: place.name,
+          position: place.geometry.location,
+          // 検索によるマーカーは非表示
+          visible: false,
+        })
+      );
+
+      if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+    // "fitBounds"メソッドはmapクラスのメソッド。指定した境界を見えやすい位置にビューポートを変更する。
+  });
+  // ここまで
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GoogleMAP_API_KEY'] %>&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GoogleMAP_API_KEY'] %>&callback=initAutocomplete&libraries=places" defer></script>
