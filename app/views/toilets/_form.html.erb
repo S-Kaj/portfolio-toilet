@@ -17,17 +17,24 @@
     <label class="required">場所の指定</label>
     <br>
     <i>※マップ上をクリックしてピンを置くことで場所が指定されます</i>
+    <br>
+    <input
+      id="pac-input"
+      class="controls"
+      type="text"
+      placeholder="場所を検索"
+    />
     <div id="map"></div>
     <div class="form-flame men">
       <p class="info-label men">◆ 男性用トイレの情報 ◆</p>
       <hr class="men">
       <div>
         <%= form.label :m_urinal %>
-        <%= form.number_field :m_urinal, :class => 'form-control number' %>
+        <%= form.number_field :m_urinal, :in => 0..30, :class => 'form-control number' %>
       </div>
       <div>
         <%= form.label :room %>
-        <%= form.number_field :m_room, :class => 'form-control number' %>
+        <%= form.number_field :m_room, :in => 0..30, :class => 'form-control number' %>
       </div>
       <div>
         <%= form.label :washlet %>
@@ -39,7 +46,7 @@
       <hr class="women">
       <div>
         <%= form.label :room %>
-        <%= form.number_field :w_room, :class => 'form-control number' %>
+        <%= form.number_field :w_room, :in => 0..30, :class => 'form-control number' %>
       </div>
       <div>
         <%= form.label :washlet %>
@@ -80,9 +87,16 @@
   border-radius: 0.5rem;
   border: 3px solid #636363;
 }
+
+#pac-input {
+  height: 30px;
+  font-size: 1.1rem;
+  text-align: center;
+  border: 3px solid #087241;
+}
 </style>
 <script>
-function initMap() {
+function initAutocomplete() {
   let myLatlng = { lat: 35.681, lng: 139.767 };
   let map = new google.maps.Map(document.getElementById('map'), {
     center: myLatlng,         //地図の中心点
@@ -100,12 +114,75 @@ function initMap() {
     map: map
   });
 
+  // ここから検索窓に関する記述
+  const input = document.getElementById("pac-input");
+  const searchBox = new google.maps.places.SearchBox(input);
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  map.addListener("bounds_changed", () => {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  let markers = [];
+  searchBox.addListener("places_changed", () => {
+  // "place_chaged"イベントはAutoCompleteクラスのイベント.
+    const places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    markers.forEach((marker) => {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    const bounds = new google.maps.LatLngBounds();
+    // "LatLngBounds"クラスは境界を作るインスンタンスを作成。引数は左下、右上の座標。
+    places.forEach((place) => {
+      if (!place.geometry) {
+        // "geometry"はplaceライブラリのメソッド。
+        console.log("Returned place contains no geometry");
+        return;
+      }
+
+      markers.push(
+        new google.maps.Marker({
+          map,
+          title: place.name,
+          position: place.geometry.location,
+          // 検索によるマーカーは非表示
+          visible: false,
+        })
+      );
+
+      if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+    // "fitBounds"メソッドはmapクラスのメソッド。指定した境界を見えやすい位置にビューポートを変更する。
+  });
+  // ここまで
+
+  // クリックした位置にピンを立てる
   google.maps.event.addListener(map, 'click', (e) => {
     document.getElementById("map_lat").value = e.latLng.lat();
     document.getElementById("map_lng").value = e.latLng.lng();
     marker.setPosition(e.latLng);
   });
 }
-google.maps.event.addDomListener(window, 'load', initMap);
+google.maps.event.addDomListener(window, 'load', initAutocomplete);
+
+// EnterキーによるSubmitを防ぐ
+document.onkeypress = enter;
+function enter(){
+  if( window.event.keyCode == 13 ){
+    return false;
+  }
+}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GoogleMAP_API_KEY'] %>&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GoogleMAP_API_KEY'] %>&callback=initAutocomplete&libraries=places" defer></script>
