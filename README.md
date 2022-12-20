@@ -28,7 +28,7 @@
 
 ## トイレ情報詳細ページ
 登録したトイレ情報の詳細が表示されます。
-![トイレ情報詳細ページ](https://drive.google.com/uc?export=view&id=1UhVS1bV9XE5mkFS3RFc6gwxFgV0oYrNR)
+![トイレ情報詳細ページ](https://drive.google.com/uc?export=view&id=1YogMt3oYghsadDg3ICgvOWXNVsUA0mtC)
 <br>
 <br>
 
