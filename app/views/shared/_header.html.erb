@@ -17,7 +17,7 @@
         <div class="header right icon">
           <% if current_user.image.attached? %>
             <%= link_to mypage_users_path do %>
-              <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: "image-display" %>
+              <%= image_tag current_user.image.variant(resize_to_limit: [65, 65]), class: 'image-display' %>
             <% end %>
           <% else %>
             <%= link_to mypage_users_path do %>
