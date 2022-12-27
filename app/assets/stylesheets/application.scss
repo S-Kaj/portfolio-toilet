@@ -46,7 +46,7 @@ $cShadow: #232323;
     justify-content: end;
     &.name {
       padding-right: 5px;
-      width: 160px;
+      width: 230px;
       height: 80px;
       text-align: right;
     }
@@ -56,6 +56,12 @@ $cShadow: #232323;
       height: 70px;
     }
   }
+}
+
+#btn-guest {
+  font-size: 1.2rem;
+  color: red;
+  background-color: yellow;
 }
 
 .blank {
