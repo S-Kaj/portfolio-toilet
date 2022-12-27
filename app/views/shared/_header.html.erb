@@ -28,8 +28,9 @@
       <% else %>
         <div class="header right name">
           <p>
-            <%= link_to 'ログイン', '/users/sign_in/', class: 'btn-sign_in' %><br />
-            <%= link_to '新規ユーザー登録', '/users/sign_up/', class: 'btn-sign_up', id: 'sign_up' %>
+            <%= link_to 'ログイン', '/users/sign_in/' %><br />
+            <%= link_to '新規ユーザー登録', '/users/sign_up/' %><br />
+            <%= link_to 'ゲストログイン(閲覧用)', users_guest_sign_in_path, id: 'btn-guest', method: :post %>
           </p>
         </div>
       <% end %>
